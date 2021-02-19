@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+  <title>Fanavia</title>
+  <link rel="stylesheet" type="text/css" href="custom.css">
+  <!-- <script type="text/javascript" src="data.json"></script> -->
+  <script async src="script.js"></script>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" rel="stylesheet">
+</head>
+
+<body>
+  <!-- <section>
+    <nav class="navbar navbar-light background-as text-white">
+      <a class="navbar-brand display-3 text-white" style="font-weight:900;" href="#">Navbar</a>
+    </nav>
+  </section> -->
+  <main>
+    <section class="background-as">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-md-10 text-white text-center">
+            <h1 class="display-3" style="font-weight:900;"><strong><br /><br />Fanavia.org — поиск дешёвых авиабилетов для любителей футбольных выездов</strong></h1>
+            <h4 class=""><br />Сделано в партнёрстве с Aviasales*<br /><br /></h4>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="background-as" id="club_cards">
+      <div class="container pb-1">
+        <div class="club_cards_section row justify-content-center pt-1 pb-5"></div>
+      </div>
+      </div>
+    </section>
+    <section class="background-as">
+      <div class="container">
+        <div class="row justify-content-center pt-5 pb-5">
+          <div id="games-table-container" class="col-md-10 bg-white games-table-container" style="display:none; padding:20px 40px 10px;">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col"></th>
+                  <th scope="col">Выезд</th>
+                  <th scope="col">Время матча</th>
+                  <!-- <th scope="col">Время</th> -->
+                  <th scope="col" class="text-center">Найти билеты</th>
+                </tr>
+              </thead class="table-borderless">
+              <tbody id="games-table" class="games-table">
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="background-as">
+      <div class="container">
+        <div class="row justify-content-center pt-5 pb-5 text-center" style="height:500px;">
+        </div>
+        <!-- Button trigger modal -->
+        <!-- Button trigger modal -->
+<button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  открыть модалку
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row justify-content-center pt-5 pb-5 text-center" style="height:500px;">
+</div>
+
+      </div>
+    </section>
+
+  </main>
+</body>
+
+</html>

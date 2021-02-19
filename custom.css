@@ -1,0 +1,57 @@
+body {
+  font-family: 'Roboto', sans-serif;
+}
+.background-as {
+  background-color: #1168FE;
+}
+.club-logo-card {
+  background-color: #fff;
+  border-radius: 10px;
+  margin: 5px;
+  max-width: 150px;
+  padding: 5px;
+}
+.club-logo-card a{
+  /* padding-left: 0px;
+  padding-right: 0px; */
+  margin-left: 0;
+  margin-right: 0;
+}
+.club-logo-card .card-body {
+  padding: 0;
+  padding-bottom: 5px;
+}
+.games-table-container{
+  border-radius: 10px;
+}
+.game-line {
+  min-height: 80px;
+}
+.game-line p {
+  margin-bottom: 0;
+}
+.game-line div {
+  float: left;
+  padding:5px;
+}
+.game-line-img {
+  width:80px;
+}
+.game-line-rival {
+  width:80px;
+}
+.game-line-city {
+  width:150px;
+}
+.game-line-date {
+  width:80px;
+}
+.game-line-time {
+  width:80px;
+}
+.game-line-league {
+  width:130px;
+}
+.game-line-button {
+  width:auto;
+}
