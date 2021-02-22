@@ -7,6 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
   <title>Fanavia</title>
   <link rel="stylesheet" type="text/css" href="custom.css">
   <!-- <script type="text/javascript" src="data.json"></script> -->
@@ -27,30 +28,33 @@
       <div class="container">
         <div class="row justify-content-center">
           <div class="col-md-10 text-white text-center">
-            <h1 class="display-3" style="font-weight:900;"><strong><br /><br />Fanavia.org — поиск дешёвых авиабилетов для любителей футбольных выездов</strong></h1>
-            <h4 class=""><br />Сделано в партнёрстве с Aviasales*<br /><br /></h4>
+            <h1 class="display-3" style="font-weight:900;"><strong><br /><br />Поисковик всей хуйни для выезда</strong></h1>
+            <h4 class=""><br />Сделано фанами для фанов<br /><br /></h4>
           </div>
         </div>
       </div>
     </section>
     <section class="background-as" id="club_cards">
       <div class="container pb-1">
-        <div class="club_cards_section row justify-content-center pt-1 pb-5"></div>
+        <div class="club_cards_section row justify-content-center pt-1 pb-2"></div>
       </div>
       </div>
     </section>
+
     <section class="background-as">
       <div class="container">
         <div class="row justify-content-center pt-5 pb-5">
-          <div id="games-table-container" class="col-md-10 bg-white games-table-container" style="display:none; padding:20px 40px 10px;">
-            <table class="table">
+          <div id="games-table-container" class="col-md-12 bg-white games-table-container" style="display:none; padding:20px 40px 10px;">
+            <table class="table table-hover">
               <thead>
                 <tr>
                   <th scope="col"></th>
                   <th scope="col">Выезд</th>
                   <th scope="col">Время матча</th>
-                  <!-- <th scope="col">Время</th> -->
-                  <th scope="col" class="text-center">Найти билеты</th>
+                  <!-- <th scope="col" class="text-center">Когда</th> -->
+                  <th scope="col" class="text-center">Перелёт<br /><small>(цена на Aviasales)</small></th>
+                  <th scope="col" class="text-center">Жильё</th>
+                  <th scope="col" class="text-center">Матч</th>
                 </tr>
               </thead class="table-borderless">
               <tbody id="games-table" class="games-table">
@@ -60,40 +64,55 @@
         </div>
       </div>
     </section>
+    <!-- <section class="background-as" id="club_cards">
+      <div class="container pb-1">
+        <div class="row 111justify-content-center pt-1 pb-1">
+          <div class="col-md-4 text-center">
+            <div class="input-group">
+              <span class="input-group-text">Поедем из города:</span>
+              <input type="text" aria-label="First name" class="form-control" value="Ростов-на-Дону">
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </section> -->
     <section class="background-as">
       <div class="container">
-        <div class="row justify-content-center pt-5 pb-5 text-center" style="height:500px;">
+        <div class="row justify-content-center pt-5 pb-5 text-center" style="height:500px;"></div>
+        <div class="week-buttons">
+          <div>28<br /><small>Ср</small></div>
+          <div>29<br /><small>Чт</small></div>
+          <div>30<br /><small>Пт</small></div>
+          <div style="background-color:pink">31<br /><small>Сб</small></div>
+          <div style="background-color:pink">1<br /><small>Вс</small></div>
+          <div>2<br /><small>Пн</small></div>
+          <div>3<br /><small>Вт</small></div>
+
         </div>
-        <!-- Button trigger modal -->
-        <!-- Button trigger modal -->
-<button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal">
-  открыть модалку
-</button>
+        <div class="row justify-content-center pt-5 pb-5 text-center" style="height:500px;"></div>
+      </div>
+    </section>
+
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Вылет и возвращение</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        ...
+        <input type="date" id="start" name="trip-start"
+       value="2021-02-23">
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Искать билеты</button>
       </div>
     </div>
   </div>
 </div>
-
-<div class="row justify-content-center pt-5 pb-5 text-center" style="height:500px;">
-</div>
-
-</div>
-    </section>
 
   </main>
 </body>

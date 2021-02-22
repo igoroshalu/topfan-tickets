@@ -2,75 +2,110 @@ let clubs = [
   {
     id: 1,
     name: "Ростов",
-    logo: "images/rostov.png"
+    logo: "rostov.png",
+    ticket_shop: "https://tickets.fc-rostov.ru/",
+    show: 1,
   },
   {
     id: 2,
     name: "ЦСКА",
-    logo: "images/cska.png"
+    logo: "cska.png",
+    ticket_shop: "https://events.pfc-cska.com/calendar",
+    show: 1,
   },
   {
     id: 3,
     name: "Зенит",
-    logo: "images/zenit.png"
+    logo: "zenit.png",
+    ticket_shop: "https://tickets.fc-zenit.ru/football/tickets/",
+    show: 1,
   },
   {
     id: 4,
     name: "Спартак",
-    logo: "images/spartak.png"
+    logo: "spartak.png",
+    ticket_shop: "https://tickets.spartak.com/",
+    show: 1,
+
   },
   {
     id: 5,
     name: "Динамо",
-    logo: "images/dynamo.png"
+    logo: "dynamo.png",
+    ticket_shop: "https://fcdynamo.ru/shop/tickets/",
+    show: 1,
   },
   {
     id: 6,
     name: "Локомотив",
-    logo: "images/lokomotiv.png"
+    logo: "lokomotiv.png",
+    ticket_shop: "https://tickets.fclm.ru/ru/",
+    show: 1,
   },
   {
     id: 7,
     name: "Краснодар",
-    logo: "images/krasnodar.png"
+    logo: "krasnodar.png",
+    ticket_shop: "https://www.fckrasnodar.ru/stadium/tickets",
+    show: 1,
   },
   {
     id: 8,
     name: "Сборная",
-    logo: "images/disabled.png"
+    logo: "disabled.png",
+    ticket_shop: "",
+    show: 1,
+  },
+  {
+    id: 9,
+    name: "Химки",
+    logo: "khimki.png",
+    ticket_shop: "https://tickets.fckhimki.com/",
+  },
+  {
+    id: 10,
+    name: "Ротор",
+    logo: "rotor.png",
+    ticket_shop: "https://vlg.kassir.ru/bilety-na-sportivnye-meropriyatiya",
+  },
+  {
+    id: 11,
+    name: "Урал",
+    logo: "ural.png",
+    ticket_shop: "http://ticket.fc-ural.ru/",
+  },
+  {
+    id: 12,
+    name: "Сочи",
+    logo: "sochi.png",
+    ticket_shop: "https://tickets.pfcsochi.ru/",
+  }, {
+    id: 13,
+    name: "Уфа",
+    logo: "ufa.png",
+    ticket_shop: "https://tickets.fcufa.pro/",
+  }, {
+    id: 14,
+    name: "Ахмат",
+    logo: "akhmat.png",
+    ticket_shop: "https://www.ticketland.ru/persons/fk-terek/",
+  }, {
+    id: 15,
+    name: "Тамбов",
+    logo: "tambov.png",
+    ticket_shop: "http://fc-tambov.ru/modules/content/page.php?id=4125",
+  }, {
+    id: 16,
+    name: "Рубин",
+    logo: "rubin.png",
+    ticket_shop: "https://tickets.rubin-kazan.ru/",
+  }, {
+    id: 17,
+    name: "Арсенал",
+    logo: "arsenal.png",
+    ticket_shop: "https://arsenaltula.ru/tickets/bilety_onlain/",
   },
 ];
-// генерим карточки клубов
-clubs.forEach(el => {
-  document.querySelector(".club_cards_section").insertAdjacentHTML('beforeend', `<div class="club-logo-card card text-center">
-      <img src="${el.logo}" class="card-img-top" alt="">
-      <div class="card-body">
-        <h5 class="card-title">${el.name}</h5>
-        <a onclick="show_games(this)" id="${el.name}" href="#club_cards" class="btn btn-outline-primary">Все выезда</a>
-      </div>
-			</div>
-        `);
-});
-// let clubs = [
-//   {
-//     "id":"",
-//     "name":"",
-//     "name_eng":"",
-//     "city":"",
-//     "gps":"",
-//     "timezone":"",
-//     "tickets":"",
-//   },
-//   {
-//     "id":"",
-//     "name":"Зенит",
-//     "name_eng":"Zenit",
-//     "city":"Cанкт-Петербург",
-//     "gps":"",
-//     "timezone":"",
-//     "tickets":"",
-//   },
-// ]
 let games = [
   {
     "round": "Round 20",
@@ -425,8 +460,7 @@ let games = [
     "iata2": "MOW",
     "img": "akhmat",
   },
-]
-// Дни недели
+];
 let daysOfWeek = ['Воскресенье',
   'Понедельник',
   'Вторник',
@@ -435,8 +469,30 @@ let daysOfWeek = ['Воскресенье',
   'Пятница',
   'Суббота',
 ];
+
+// генерим карточки клубов
+clubs.forEach(el => {
+  if (el.show == true) {
+  document.querySelector(".club_cards_section").insertAdjacentHTML('beforeend', `<div class="club-logo-card card text-center">
+      <img src="images/${el.logo}" class="card-img-top" alt="">
+      <div class="card-body">
+        <h5 class="card-title">${el.name}</h5>
+        <a onclick="ShowGames(this)" id="${el.name}" href="#club_cards" class="btn btn-outline-primary">Все выезда</a>
+      </div>
+			</div>
+        `);
+      }
+});
+
+
+function FormatDateDots(date) {
+  let a = date[8] + date[9] + "." + date[5] + date[6] + "." + date[0] + date[1] + date[2] + date[3];
+  return a
+}
+
+
 // Выводим игры клуба
-function show_games(e) {
+function ShowGames(e) {
   document.getElementById('games-table-container').style.display = "block";
   document.getElementById('games-table').innerHTML = '';
   for (var i = 0; i < games.length; i++) {
@@ -445,33 +501,65 @@ function show_games(e) {
       let e = daysOfWeek[h.getDay()];
       let b = games[i].date;
       let c = b[8] + b[9] + "." + b[5] + b[6] + "." + b[0] + b[1] + b[2] + b[3];
+
+      let example_price = Math.random() * 20000
+      example_price = Math.round(example_price)
+      example_price = (example_price).toLocaleString('ru')
+
       // прибавляем 1 день к дате
       let f = new Date(games[i].date);
       f.setDate(f.getDate() + 1);
-      let m = f.getMonth() + 1;
-      f = f.getFullYear() + "-" + m + "-" + f.getDate();
+      let f2 = f;
+      f = f.getFullYear() + "-" + (f.getMonth() + 1) + "-" + f.getDate();
 
-      document.querySelector(".games-table").insertAdjacentHTML('beforeend', `  <tr>
-            <th class="align-middle"><img height=50 src="images/` + games[i].img + `.png" class="" alt="" /></th>
-            <td class="align-middle">` + games[i].team1 + `</br>(` + games[i].city + `)</td>
-            <td class="align-middle">` + c + `</br>` + games[i].time + ` <bt>` + e + `</bt></td>
-            <td class="align-middle text-center"><a href="https://www.aviasales.ru/search?origin_iata=` + games[i].iata2 + `&destination_iata=` + games[i].iata1 + `&adults=1&children=0&infants=0&trip_class=0&depart_date=` + games[i].date + `&return_date=${f}&with_request=true&marker=311551.site" target="_blank" class="btn btn-outline-primary"><i class="fas fa-plane"></i> Авиабилеты</a>
-              <a href="" target="_blank" class="btn btn-outline-primary"><i class="fas fa-futbol"></i> Билеты на матч</a>
+      // отнимаем 1 день от даты
+      let g = new Date(games[i].date);
+      g.setDate(g.getDate() - 1);
+      let g2 = g
+      g = g.getFullYear() + "-" + (g.getMonth() + 1) + "-" + g.getDate();
+
+
+      let formatter = new Intl.DateTimeFormat("ru");
+
+      // выводим кнопки покупки билета на матч
+      function GetTicketLink(team) {
+        for (var i = 0; i < clubs.length; i++) {
+          if (team == clubs[i].name) {
+            return clubs[i].ticket_shop;
+            break
+          }
+        }
+      }
+      // проверяем есть ли онлайн-касса у клуба
+      let ticket_button = "Нет кассы";
+      if(GetTicketLink(games[i].team1) != undefined){
+        ticket_button = '<a href="' + GetTicketLink(games[i].team1) + '" target="_blank" class="btn btn-outline-primary"> Онлайн-касса<br>ФК ' + games[i].team1 + '</a>'
+      };
+
+      document.querySelector(".games-table").insertAdjacentHTML('beforeend', `
+            <tr>
+            <th class="align-middle"><img height=50 src="images/${games[i].img}.png" class="" alt="" /></th>
+            <td class="align-middle">${games[i].team1}</br>(${games[i].city})</td>
+            <td class="align-middle">${c}</br>${games[i].time} <bt>${e}</bt></td>
+            <td class="align-middle text-center"><a style="margin-bottom:0px;" href="https://www.aviasales.ru/search?origin_iata=
+            ${games[i].iata2}&destination_iata=${games[i].iata1}&adults=1&children=0&infants=0&trip_class=0&depart_date=${g}&return_date=${f}&with_request=true&marker=311551.site" target="_blank" class="btn btn-outline-primary">
+            <i class="fas fa-plane"></i>&nbsp;&nbsp;  ${example_price} р.</a>
+            <br><small><small><a href="" data-bs-toggle="modal" data-bs-target="#exampleModal">${formatter.format(g2)} &mdash; ${formatter.format(f2)}</small></small></a>
+            </td>
+            <td class="align-middle text-center">
+            <a href="" target="_blank" class="btn btn-link">Booking.com</a><br>
+            <a href="https://sutochno.ru/front/searchapp/search?guests_adults=1&occupied=${g}%3B${f}&id=397366&type=city&term=${games[i].city}" target="_blank" class="btn btn-link">Суточно.ру</a>
+            </td>
+            <td class="align-middle text-center">
+            ${ticket_button}
             </td>
           </tr>
           `);
     }
   }
 }
-let response = fetch("https://api.travelpayouts.com/v2/prices/week-matrix?currency=rub&origin=MOW&destination=ROV&show_to_affiliates=true&depart_date=2021-03-13&return_date=2021-03-14&token=7ce5cb7674bf98afc6f68c8eb4f47336");
 
-if (response.ok) { // если HTTP-статус в диапазоне 200-299
-  // получаем тело ответа (см. про этот метод ниже)
-  let json = response.json();
-  console.log(json);
-} else {
-  alert("Ошибка HTTP: " + response.status);
-}
 
+// <a href="" data-bs-toggle="modal" data-bs-target="#exampleModal">${formatter.format(g2)} &mdash; ${formatter.format(f2)}</a>
 // <a href="" target="_blank" class="btn btn-outline-primary"><i class="fas fa-subway"></i> Автобус</a>
 // <a href="" target="_blank" class="btn btn-outline-primary"><i class="fas fa-bus"></i> Поезд</a>
