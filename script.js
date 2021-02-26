@@ -17,6 +17,52 @@ function FormatDateDots(date) {
   return a
 }
 
+let departureDelay = 1;
+let arrivalDelay = 1;
+function StepanFunction() {
+    document.getElementById("s").setAttribute("style", "left:0; border-radius: .25rem 0 0 .25rem;");
+    let departureDelay = 3;
+    g = g.getFullYear() + "-" + (g.getMonth() + 1) + "-" + g.getDate();
+    console.log(this);
+}
+function StepanFunction1() {
+    document.getElementById('s').setAttribute("style", "left:60px;");
+    let departureDelay = 2;
+}
+function StepanFunction2() {
+    document.getElementById('s').setAttribute("style", "left:120px;");
+    let departureDelay = 1;
+}
+function StepanFunction3() {
+    document.getElementById('s').setAttribute("style", "left:180px;");
+    s.style.borderRight = "none"
+    let departureDelay = 0;
+}
+function StepanFunction4() {
+    document.getElementById('s2').setAttribute("style", "left:240px;");
+    let arrivalDelay = 0;
+}
+function StepanFunction5() {
+    document.getElementById('s2').setAttribute("style", "left:300px;");
+    let arrivalDelay = 1;
+}
+function StepanFunction6() {
+    document.getElementById('s2').setAttribute("style", "left:360px;");
+    let arrivalDelay = 2;
+}
+function StepanFunction7() {
+    document.getElementById('s2').setAttribute("style", "left:420px; border-radius: 0 .25rem .25rem 0;");
+    let arrivalDelay = 3;
+}
+calendar_day_1.onclick = StepanFunction;
+calendar_day_2.onclick = StepanFunction1;
+calendar_day_3.onclick = StepanFunction2;
+match_day_left.onclick = StepanFunction3;
+match_day_right.onclick = StepanFunction4;
+calendar_day_5.onclick = StepanFunction5;
+calendar_day_6.onclick = StepanFunction6;
+calendar_day_7.onclick = StepanFunction7;
+
 // Выводим игры клуба
 function ShowGames(my_team) {
   document.getElementById('games-table-container').style.display = "block";
@@ -33,12 +79,12 @@ function ShowGames(my_team) {
       example_price = (example_price).toLocaleString('ru')
       // прибавляем 1 день к дате
       let f = new Date(games[i].date);
-      f.setDate(f.getDate() + 1);
+      f.setDate(f.getDate() + arrivalDelay);
       let f2 = f;
       f = f.getFullYear() + "-" + (f.getMonth() + 1) + "-" + f.getDate();
       // отнимаем 1 день от даты
       let g = new Date(games[i].date);
-      g.setDate(g.getDate() - 1);
+      g.setDate(g.getDate() - departureDelay);
       let g2 = g;
       g = g.getFullYear() + "-" + (g.getMonth() + 1) + "-" + g.getDate();
 
@@ -121,48 +167,7 @@ function ShowGames(my_team) {
 //   }
 // })
 
-function StepanFunction() {
-    document.getElementById("s").setAttribute("style", "left:0; border-radius: .25rem 0 0 .25rem;");
-    let departureDelay = -3
-    console.log(this);
-}
-function StepanFunction1() {
-    document.getElementById('s').setAttribute("style", "left:60px;");
-    let departureDelay = -2
-}
-function StepanFunction2() {
-    document.getElementById('s').setAttribute("style", "left:120px;");
-    let departureDelay = -1
-}
-function StepanFunction3() {
-    document.getElementById('s').setAttribute("style", "left:180px;");
-    s.style.borderRight = "none"
-    let departureDelay = 0
-}
-function StepanFunction4() {
-    document.getElementById('s2').setAttribute("style", "left:240px;");
-    let departureDelay = 0
-}
-function StepanFunction5() {
-    document.getElementById('s2').setAttribute("style", "left:300px;");
-    let departureDelay = 0
-}
-function StepanFunction6() {
-    document.getElementById('s2').setAttribute("style", "left:360px;");
-    let departureDelay = 0
-}
-function StepanFunction7() {
-    document.getElementById('s2').setAttribute("style", "left:420px; border-radius: 0 .25rem .25rem 0;");
-    let departureDelay = 0
-}
-calendar_day_1.onclick = StepanFunction;
-calendar_day_2.onclick = StepanFunction1;
-calendar_day_3.onclick = StepanFunction2;
-match_day_left.onclick = StepanFunction3;
-match_day_right.onclick = StepanFunction4;
-calendar_day_5.onclick = StepanFunction5;
-calendar_day_6.onclick = StepanFunction6;
-calendar_day_7.onclick = StepanFunction7;
+
 
 
 
