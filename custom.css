@@ -57,7 +57,7 @@ body {
   width:auto;
 }
 .week-buttons {
-  width:480px;
+  width:380px;
   height:60px;
   display: flex;
   flex-direction: row;
@@ -68,12 +68,12 @@ body {
 
 }
 .week-buttons div {
-  width:60px;
-  height:60px;
+  width:50px;
+  height:50px;
   background-color: white;
   border-right: 1px solid white;
   text-align: center;
-  padding-top: 25px;
+  padding-top: 22px;
   background-color: #f1f1f1;
 }
 .week-buttons div:hover {
@@ -96,48 +96,46 @@ body {
   background-color: lightblue!important;
 }
 .week_buttons_match_day {
-  width: 120px!important;
+  width: 80px!important;
   position:relative;
 }
-#match_day_left, #match_day_right {
+.calendar_day_4_left, .calendar_day_4_right {
   height:100%;
-  width: 60px;
+  width: 40px;
   position: absolute;
   top:0;
   left:0;
   opacity: 0;
   z-index: 9999;
 }
-#match_day_right {
-  left:60px;
+.calendar_day_4_right {
+  left:40px;
 }
 
-.calendar_day_departure, .calendar_day_arrival {
+.selected_departure_day, .selected_arrival_day {
   height:100%;
-  width:120px;
+  /* width:120px; */
   position:absolute;
   top:0;
-  left:60px;
+  left:100px;
   z-index: 9999;
   background-color: rgba(30, 150, 6, 0.3)!important;
   padding-top: 6px!important;
   border-right: none;
+  transition: all 0.2s ease-out;
+}
+.selected_arrival_day {
+  left:230px;
 }
 .match_day_icon {
   position: absolute;
   top:0;
-  left:30px;
+  left:20px;
   height: 100%;
-  width: 60px;
+  width: 50px;
   background-color: rgba(0, 0, 0, 0)!important;
   text-align: center;
   padding-top: 6px!important;
   z-index: 2;
   border-right: none!important;
-}
-.calendar_day_arrival {
-  left:300px;
-}
-#s, #s2 {
-  transition: all 0.2s ease-out;
 }
