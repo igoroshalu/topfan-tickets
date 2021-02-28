@@ -109,17 +109,6 @@ let clubs = [
 let games = [
   {
     "round": "Round 20",
-    "city": "Санкт-Петербург",
-    "date": "2021-02-27",
-    "time": "16:30",
-    "team1": "Зенит",
-    "team2": "Ростов",
-    "iata1": "LED",
-    "iata2": "ROV",
-    "img": "zenit",
-  },
-  {
-    "round": "Round 20",
     "city": "Грозный",
     "date": "2021-02-28",
     "time": "16:30",
