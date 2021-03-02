@@ -12,22 +12,21 @@ clubs.forEach(el => {
   }
 });
 
-
-
 function FormatDateDots(date) {
   let a = date[8] + date[9] + "." + date[5] + date[6] + "." + date[0] + date[1] + date[2] + date[3];
   return a
 }
 
-
-
-
 // Выводим игры клуба
 function ShowGames(my_team) {
-
   document.getElementById('games-table-container').style.display = "block";
   document.getElementById('games-table').innerHTML = '';
-  for (var i = 0; i < games.length; i++) {
+  // создаём массив дат вылета и прилёта
+  var departArray = [];
+  var ariveArray = [];
+  for (let i = 0; i < games.length; i++) {
+    departArray.push(2);
+    ariveArray.push(4);
     if (games[i].team2 == my_team.id) {
       let h = new Date(games[i].date);
       let e = daysOfWeek[h.getDay()];
@@ -35,85 +34,98 @@ function ShowGames(my_team) {
       let c = b[8] + b[9] + "." + b[5] + b[6] + "." + b[0] + b[1] + b[2] + b[3];
 
       // генерим рандомную цену
-      let example_price = Math.random() * 20000
-      example_price = Math.round(example_price)
-      example_price = (example_price).toLocaleString('ru')
+      function getExamplePrice() {
+      g = Math.random() * 20000;
+      g = Math.round(g);
+      g = (g).toLocaleString('ru');
+      return g
+    }
+
+    function addZero(number) {
+      if (number < 10) {
+        number = "0" + number
+        return number
+      }
+      return number
+    }
+
 
       // прибавляем 1 день к дате
       let matchDate = new Date(games[i].date);
       matchDate.setDate(matchDate.getDate());
-      matchDateForAviasalesLink = matchDate.getFullYear() + "-" + (matchDate.getMonth() + 1) + "-" + matchDate.getDate();
-
-      function getNeighbourDays(date) {
-        let date1 = new Date(date - 3 * 24 * 60 * 60 * 1000).getDate();
-        let date2 = new Date(date - 2 * 24 * 60 * 60 * 1000).getDate();
-        let date3 = new Date(date - 1 * 24 * 60 * 60 * 1000).getDate();
-        let date4 = new Date(date).getDate();
-        let date5 = new Date(date - -1 * 24 * 60 * 60 * 1000).getDate();
-        let date6 = new Date(date - -2 * 24 * 60 * 60 * 1000).getDate();
-        let date7 = new Date(date - -3 * 24 * 60 * 60 * 1000).getDate();
-        let day1 = new Date(date - 3 * 24 * 60 * 60 * 1000).getDay();
-        let day2 = new Date(date - 2 * 24 * 60 * 60 * 1000).getDay();
-        let day3 = new Date(date - 1 * 24 * 60 * 60 * 1000).getDay();
-        let day4 = new Date(date).getDay();
-        let day5 = new Date(date - -1 * 24 * 60 * 60 * 1000).getDay();
-        let day6 = new Date(date - -2 * 24 * 60 * 60 * 1000).getDay();
-        let day7 = new Date(date - -3 * 24 * 60 * 60 * 1000).getDay();
-        let days = ['вc', 'пн', 'вт', 'ср', 'чт', 'пт', 'сб'];
-        return [date1, date2, date3, date4, date5, date6, date7,
-          days[day1], days[day2], days[day3], days[day4], days[day5], days[day6], days[day7]]
+      matchDateForAviasalesLink = matchDate.getFullYear() + "-" + addZero((matchDate.getMonth() + 1)) + "-" + addZero(matchDate.getDate());
+      //считаем соседние дни с матчем
+      function getNeighborsDates(date) {
+        let dates = []
+        for (let w = -3; w <= 3; w++) {
+          dates[w + 3] = new Date(+date + w * 24 * 60 * 60 * 1000).getDate()
+        }
+        return dates
       }
 
-      // отнимаем 1 день от даты
-      let g = new Date(games[i].date);
-      g.setDate(g.getDate());
-      let g2 = g;
-      g = g.getFullYear() + "-" + (g.getMonth() + 1) + "-" + g.getDate();
+      function getNeighborsDays(date) {
+        let days = []
+        let weekDays = ['вc', 'пн', 'вт', 'ср', 'чт', 'пт', 'сб'];
+        for (let w = -3; w <= 3; w++) {
+          days[w + 3] = weekDays[new Date(+date + w * 24 * 60 * 60 * 1000).getDay()]
+        }
+        return days
+      }
 
-      let formatter = new Intl.DateTimeFormat("ru");
+      function getNeighborsDateLink(date) {
+        let dates = []
+        for (let w = -3; w <= 3; w++) {
+          // dates[w+3] = new Date(+date + w * 24 * 60 * 60 * 1000).getDate();
+          dates[w + 3] = "" + date.getFullYear() + "-" + addZero((date.getMonth() + 1)) + "-" + addZero((new Date(+date + w * 24 * 60 * 60 * 1000).getDate()))
+        }
+        return dates
+      }
+
       // выводим кнопки покупки билета на матч
       function GetTicketLink(team) {
-        for (var i = 0; i < clubs.length; i++) {
+        for (let i = 0; i < clubs.length; i++) {
           if (team == clubs[i].name) {
             return clubs[i].ticket_shop;
             break
           }
         }
       }
-
       // проверяем есть ли онлайн-касса у клуба
       let ticket_button;
       if (GetTicketLink(games[i].team1) != undefined) {
         ticket_button = '<a href="' + GetTicketLink(games[i].team1) + '" target="_blank" class="btn btn-outline-primary">ФК ' + games[i].team1 + '<br>онлайн-касса</a>'
       } else {
-        ticket_button = "Нет кассы"
+        ticket_button = '<a href="https://www.google.com/search?q=Купить билеты на матч ' + games[i].team1 + ' ' + games[i].team2 + ' ' + c + '" target="_blank" class="btn btn-outline-secondary">Искать в Google</a>'
       }
 
       if (matchDate >= new Date()) {
         document.querySelector(".games-table").insertAdjacentHTML('beforeend', `
-            <tr>
+            <tr id="tableRowId${[i]}">
             <th class="align-middle"><img height=50 src="images/${games[i].img}.png" class="" alt="" /></th>
             <td class="align-middle">${games[i].team1}</br><b>${games[i].city}</b></br>${c} </br>${games[i].time}</td>
             <td class="align-middle text-center">
-            <div class="week-buttons" id="week-buttons-${[i]}">
-              <div class="calendar_day_1 calendar_day"><p>${getNeighbourDays(matchDate)[0]} <small>${getNeighbourDays(matchDate)[7]}</small></p></div>
-              <div class="calendar_day_2 calendar_day"><p>${getNeighbourDays(matchDate)[1]} <small>${getNeighbourDays(matchDate)[8]}</small></p></div>
-              <div class="calendar_day_3 calendar_day"><p>${getNeighbourDays(matchDate)[2]} <small>${getNeighbourDays(matchDate)[9]}</small></p></div>
-              <div class="calendar_day_4 calendar_day week_buttons_match_day"><p>${getNeighbourDays(matchDate)[3]} <small>${getNeighbourDays(matchDate)[10]}</small></p>
+            <div class="week-buttons" id="weekButtons${[i]}">
+              <div class="calendar_day_1 calendar_day"><p>${getNeighborsDates(matchDate)[0]} <small>${getNeighborsDays(matchDate)[0]}</small></p></div>
+              <div class="calendar_day_2 calendar_day"><p>${getNeighborsDates(matchDate)[1]} <small>${getNeighborsDays(matchDate)[1]}</small></p></div>
+              <div class="calendar_day_3 calendar_day"><p>${getNeighborsDates(matchDate)[2]} <small>${getNeighborsDays(matchDate)[2]}</small></p></div>
+              <div class="calendar_day_4 calendar_day week_buttons_match_day"><p>${getNeighborsDates(matchDate)[3]} <small>${getNeighborsDays(matchDate)[3]}</small></p>
                 <div class="match_day_icon"><i class="fas fa-futbol"></i>&nbsp;&nbsp;&nbsp;</div>
                 <div class="calendar_day_4_left calendar_day"></div>
                 <div class="calendar_day_4_right calendar_day"></div>
               </div>
-              <div class="calendar_day_5 calendar_day"><p>${getNeighbourDays(matchDate)[4]} <small>${getNeighbourDays(matchDate)[11]}</small></p></div>
-              <div class="calendar_day_6 calendar_day"><p>${getNeighbourDays(matchDate)[5]} <small>${getNeighbourDays(matchDate)[12]}</small></p></div>
+              <div class="calendar_day_5 calendar_day"><p>${getNeighborsDates(matchDate)[4]} <small>${getNeighborsDays(matchDate)[4]}</small></p></div>
+              <div class="calendar_day_6 calendar_day"><p>${getNeighborsDates(matchDate)[5]} <small>${getNeighborsDays(matchDate)[5]}</small></p></div>
               <div class="selected_departure_day"><i class="fas fa-plane-departure"></i></div>
               <div class="selected_arrival_day"><i class="fas fa-plane-arrival"></i></div>
-              <div class="calendar_day_7 calendar_day"><p>${getNeighbourDays(matchDate)[6]} <small>${getNeighbourDays(matchDate)[13]}</small></p></div>
+              <div class="calendar_day_7 calendar_day"><p>${getNeighborsDates(matchDate)[6]} <small>${getNeighborsDays(matchDate)[6]}</small></p></div>
             </div>
             <small style="color:green; display:none;">*при перелёте в день матча, убедитесь, что успеваете по времени</small>
             </td>
-            <td class="align-middle text-center"><a style="margin-bottom:5px;" href="https://www.aviasales.ru/search?origin_iata=${games[i].iata2}&destination_iata=${games[i].iata1}&adults=1&children=0&infants=0&trip_class=0&depart_date=${matchDateForAviasalesLink}&return_date=${matchDateForAviasalesLink}&with_request=true&marker=311551.site" target="_blank" class="btn btn-primary">
-            <i class="fas fa-plane"></i>&nbsp;&nbsp;  ${example_price} р.</a>
+            <td class="align-middle text-center"><a href="https://www.aviasales.ru/search?origin_iata=`
+            + games[i].iata2 + `&destination_iata=` + games[i].iata1 + `&adults=1&children=0&infants=0&trip_class=0&depart_date=`
+            + getNeighborsDateLink(matchDate)[2] + `&return_date=` + getNeighborsDateLink(matchDate)[4]
+            + `&with_request=true&marker=311551.site" style="margin-bottom:5px;" target="_blank" class="aviasalesLink btn btn-primary">
+            <i class="fas fa-plane"></i>&nbsp;&nbsp;  <span class="ticketPrice">${getExamplePrice()}</span> р.</a>
             </td>
             <td class="align-middle text-center">
             <a href="" target="_blank" class="btn btn-link">Booking.com</a><br>
@@ -125,71 +137,67 @@ function ShowGames(my_team) {
           </tr>
           `);
       };
-      let weekButtonsBlockId = "week-buttons-" + i
-
-      var elements = document.getElementById(weekButtonsBlockId).querySelectorAll(".calendar_day");
-      for (var p = 0; p < elements.length; p++) {
+      // задаём id каждому блоку выбора дат
+      let weekButtonsBlockId = "weekButtons" + i
+      // навешиваем onclick на кнопки выбора дат
+      let elements = document.getElementById(weekButtonsBlockId).querySelectorAll(".calendar_day");
+      for (let p = 0; p < elements.length; p++) {
         elements[p].onclick = selectFlightDay;
       }
 
       function selectFlightDay() {
-
         if (this.classList[0] === "calendar_day_1") {
           document.getElementById(weekButtonsBlockId).querySelector(".selected_departure_day").setAttribute("style", "left:0; border-radius: .25rem 0 0 .25rem;");
+          departArray[i] = 0;
+          changeAviasalesLink()
         } else if (this.classList[0] === "calendar_day_2") {
           document.getElementById(weekButtonsBlockId).querySelector(".selected_departure_day").setAttribute("style", "left:50px;");
+          departArray[i] = 1;
+          changeAviasalesLink()
         } else if (this.classList[0] === "calendar_day_3") {
           document.getElementById(weekButtonsBlockId).querySelector(".selected_departure_day").setAttribute("style", "left:100px;");
+          departArray[i] = 2;
+          changeAviasalesLink()
         } else if (this.classList[0] === "calendar_day_4_left") {
           document.getElementById(weekButtonsBlockId).querySelector('.selected_departure_day').setAttribute("style", "left:150px; width:40px; padding-right:9px; border-right:none;");
+          departArray[i] = 3;
+          changeAviasalesLink()
         } else if (this.classList[0] === "calendar_day_4_right") {
           document.getElementById(weekButtonsBlockId).querySelector('.selected_arrival_day').setAttribute("style", "left:190px; width:40px; padding-left:8px;");
+          ariveArray[i] = 3;
+          changeAviasalesLink()
         } else if (this.classList[0] === "calendar_day_5") {
           document.getElementById(weekButtonsBlockId).querySelector('.selected_arrival_day').setAttribute("style", "left:230px;");
+          ariveArray[i] = 4;
+          changeAviasalesLink()
         } else if (this.classList[0] === "calendar_day_6") {
           document.getElementById(weekButtonsBlockId).querySelector('.selected_arrival_day').setAttribute("style", "left:280px;");
+          ariveArray[i] = 5;
+          changeAviasalesLink()
         } else if (this.classList[0] === "calendar_day_7") {
           document.getElementById(weekButtonsBlockId).querySelector('.selected_arrival_day').setAttribute("style", "left:330px; border-right:none; border-radius: 0 .25rem .25rem 0;");
+          ariveArray[i] = 6;
+          changeAviasalesLink()
         }
+      }
+
+      function changeAviasalesLink() {
+        document.getElementById("tableRowId"+i).querySelector('.aviasalesLink').href = `https://www.aviasales.ru/search?origin_iata=`
+        + games[i].iata2 + `&destination_iata=` + games[i].iata1 + `&adults=1&children=0&infants=0&trip_class=0&depart_date=`
+        + getNeighborsDateLink(matchDate)[departArray[i]] + `&return_date=` + getNeighborsDateLink(matchDate)[ariveArray[i]]
+        + `&with_request=true&marker=311551.site"`;
+        document.getElementById("tableRowId"+i).querySelector('.ticketPrice').innerHTML = getExamplePrice()
       }
     }
   }
 }
 
-// [].forEach.call(document.querySelectorAll('.calendar_day > div'), function(a){
-//     a.onclick=function(){
-//         document.div.style.backgroundColor=this.dataset.c;
-//     }
-// })
+var mydata = JSON.parse(data);
+console.log(mydata);
 
-
-
-// <td class="align-middle">${c}</br>${games[i].time} <bt>${e}</bt></td>
-
-// var mydata = JSON.parse(data);
-// alert(mydata[0].name);
-// alert(mydata[0].age);
-// alert(mydata[1].name);
-// alert(mydata[1].age);
-//
-//
-// function readTextFile(file, callback) {
-//   var rawFile = new XMLHttpRequest();
-//   rawFile.overrideMimeType("application/json");
-//   rawFile.open("GET", file, true);
-//   rawFile.onreadystatechange = function() {
-//     if (rawFile.readyState === 4 && rawFile.status == "200") {
-//       callback(rawFile.responseText);
-//     }
-//   }
-//   rawFile.send(null);
-// }
-//
-// //usage:
-// readTextFile("data.json", function(text) {
-//   var data = JSON.parse(data);
-// });
-
-
-// <a href="" target="_blank" class="btn btn-outline-primary"><i class="fas fa-subway"></i> Автобус</a>
-// <a href="" target="_blank" class="btn btn-outline-primary"><i class="fas fa-bus"></i> Поезд</a>
+// отнимаем 1 день от даты
+// let g = new Date(games[i].date);
+// g.setDate(g.getDate());
+// let g2 = g;
+// g = g.getFullYear() + "-" + (g.getMonth() + 1) + "-" + g.getDate();
+// let formatter = new Intl.DateTimeFormat("ru");

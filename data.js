@@ -72,7 +72,7 @@ let clubs = [
     id: 11,
     name: "Урал",
     logo: "ural.png",
-    ticket_shop: "http://ticket.fc-ural.ru/",
+    // ticket_shop: "",
   },
   {
     id: 12,
