@@ -28,11 +28,7 @@ function ShowGames(my_team) {
     departArray.push(2);
     ariveArray.push(4);
     if (games[i].team2 == my_team.id) {
-      let h = new Date(games[i].date);
-      let e = daysOfWeek[h.getDay()];
-      let b = games[i].date;
-      let c = b[8] + b[9] + "." + b[5] + b[6] + "." + b[0] + b[1] + b[2] + b[3];
-
+      let dottedMatchTime = games[i].date[8] + games[i].date[9] + "." + games[i].date[5] + games[i].date[6] + "." + games[i].date[0] + games[i].date[1] + games[i].date[2] + games[i].date[3];
       // генерим рандомную цену
       function getExamplePrice() {
       g = Math.random() * 20000;
@@ -95,14 +91,14 @@ function ShowGames(my_team) {
       if (GetTicketLink(games[i].team1) != undefined) {
         ticket_button = '<a href="' + GetTicketLink(games[i].team1) + '" target="_blank" class="btn btn-outline-primary">ФК ' + games[i].team1 + '<br>онлайн-касса</a>'
       } else {
-        ticket_button = '<a href="https://www.google.com/search?q=Купить билеты на матч ' + games[i].team1 + ' ' + games[i].team2 + ' ' + c + '" target="_blank" class="btn btn-outline-secondary">Искать в Google</a>'
+        ticket_button = '<a href="https://www.google.com/search?q=Купить билеты на матч ' + games[i].team1 + ' ' + games[i].team2 + ' ' + dottedMatchTime + '" target="_blank" class="btn btn-outline-secondary">Искать в Google</a>'
       }
 
       if (matchDate >= new Date()) {
         document.querySelector(".games-table").insertAdjacentHTML('beforeend', `
             <tr id="tableRowId${[i]}">
             <th class="align-middle"><img height=50 src="images/${games[i].img}.png" class="" alt="" /></th>
-            <td class="align-middle">${games[i].team1}</br><b>${games[i].city}</b></br>${c} </br>${games[i].time}</td>
+            <td class="align-middle">${games[i].team1}</br><b>${games[i].city}</b></br>${dottedMatchTime} </br>${games[i].time}</td>
             <td class="align-middle text-center">
             <div class="week-buttons" id="weekButtons${[i]}">
               <div class="calendar_day_1 calendar_day"><p>${getNeighborsDates(matchDate)[0]} <small>${getNeighborsDays(matchDate)[0]}</small></p></div>
@@ -129,7 +125,7 @@ function ShowGames(my_team) {
             </td>
             <td class="align-middle text-center">
             <a href="" target="_blank" class="btn btn-link">Booking.com</a><br>
-            <a href="https://sutochno.ru/front/searchapp/search?guests_adults=1&occupied=${g}%3B${matchDateForAviasalesLink}&id=397366&type=city&term=${games[i].city}" target="_blank" class="btn btn-link">Суточно.ру</a>
+            <a href="https://sutochno.ru/front/searchapp/search?guests_adults=1&occupied=${"300"}%3B${matchDateForAviasalesLink}&id=397366&type=city&term=${games[i].city}" target="_blank" class="btn btn-link">Суточно.ру</a>
             </td>
             <td class="align-middle text-center">
             ${ticket_button}
@@ -192,8 +188,15 @@ function ShowGames(my_team) {
   }
 }
 
-var mydata = JSON.parse(data);
-console.log(mydata);
+// function findBestPrice(date1,date2) {
+// forEach((item, i) => {
+//   if ()
+// });
+// }
+
+// fetch("data.json")
+//   .then(response => response.json())
+//   .then(json => console.log(json));
 
 // отнимаем 1 день от даты
 // let g = new Date(games[i].date);
