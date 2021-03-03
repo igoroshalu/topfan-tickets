@@ -17,6 +17,15 @@ function FormatDateDots(date) {
   return a
 }
 
+function load() {
+  const json = getData()
+}
+async function getData() {
+  let res = await fetch('http://api.travelpayouts.com/v2/prices/week-matrix?currency=rub&origin=LED&destination=ROV&show_to_affiliates=true&depart_date=2021-03-11&return_date=2021-03-18&token=7ce5cb7674bf98afc6f68c8eb4f47336')
+  res = await res.json()
+  return res.data
+}
+
 // Выводим игры клуба
 function ShowGames(my_team) {
   document.getElementById('games-table-container').style.display = "block";
@@ -95,6 +104,9 @@ function ShowGames(my_team) {
       }
 
       if (matchDate >= new Date()) {
+        // document.querySelector(".games-table").css('display','none')
+        console.log("ererre")
+      };
         document.querySelector(".games-table").insertAdjacentHTML('beforeend', `
             <tr id="tableRowId${[i]}">
             <th class="align-middle"><img height=50 src="images/${games[i].img}.png" class="" alt="" /></th>
@@ -132,7 +144,6 @@ function ShowGames(my_team) {
             </td>
           </tr>
           `);
-      };
       // задаём id каждому блоку выбора дат
       let weekButtonsBlockId = "weekButtons" + i
       // навешиваем onclick на кнопки выбора дат

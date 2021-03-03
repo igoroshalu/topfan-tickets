@@ -9,19 +9,26 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
   <title>Fanavia</title>
   <link rel="stylesheet" type="text/css" href="custom.css">
-  <!-- <script type="text/javascript" src="data.json"></script> -->
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <script type="text/jscript">
+
+  </script>
+
 </head>
 
-<body>
+<body onload="load()">
   <!-- <section>
     <nav class="navbar navbar-light background-as text-white">
       <a class="navbar-brand display-3 text-white" style="font-weight:900;" href="#">Navbar</a>
     </nav>
   </section> -->
+
   <main>
     <section class="background-as">
+      <div id="data">
+
+      </div>
       <div class="container">
         <div class="row justify-content-center">
           <div class="col-md-10 text-white text-center">
@@ -48,7 +55,6 @@
                 <tr>
                   <th scope="col"></th>
                   <th scope="col">Выезд</th>
-                  <!-- <th scope="col">Время матча</th> -->
                   <th scope="col" class="text-center">Вылет/Возвращение</th>
                   <th scope="col" class="text-center">Перелёт<br /><small>(лучшая цена на Aviasales)</small></th>
                   <th scope="col" class="text-center">Жильё</th>
@@ -79,21 +85,6 @@
     <section class="background-as">
       <div class="container">
         <div class="row justify-content-center pt-5 pb-5 text-center" style="height:300px;"></div>
-        <!-- <div class="week-buttons">
-          <div class="calendar_day_1 calendar_day"><p>3 <small>Вс</small></p></div>
-          <div class="calendar_day_2 calendar_day"><p>4 <small>Пн</small></p></div>
-          <div class="calendar_day_3 calendar_day"><p>5 <small>Вт</small></p></div>
-          <div class="calendar_day_4 calendar_day week_buttons_match_day"><p>6 <small>Ср</small></p>
-            <div class="match_day_icon"><i class="fas fa-futbol"></i>&nbsp;&nbsp;&nbsp;</div>
-            <div class="calendar_day_4_left calendar_day"></div>
-            <div class="calendar_day_4_right calendar_day"></div>
-          </div>
-          <div class="calendar_day_5 calendar_day"><p>7 <small>ЧТ</small></p></div>
-          <div class="calendar_day_6 calendar_day"><p>8 <small>Пт</small></p></div>
-          <div class="selected_departure_day"><i class="fas fa-plane-departure"></i></div>
-          <div class="selected_arrival_day"><i class="fas fa-plane-arrival"></i></div>
-          <div class="calendar_day_7 calendar_day"><p>9 <small>Сб</small></p></div>
-        </div> -->
         <div class="row justify-content-center pt-5 pb-5 text-center" style="height:500px;"></div>
       </div>
     </section>
