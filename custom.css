@@ -8,7 +8,7 @@ body {
 .club-logo-card {
   background-color: #fff;
   border-radius: 10px;
-  margin: 5px;
+  margin: 0 7px;
   max-width: 150px;
   padding: 5px;
 }
@@ -22,8 +22,13 @@ body {
   padding: 0;
   padding-bottom: 5px;
 }
+#games_table_section {
+  display:none;
+}
 .games-table-container{
   border-radius: 10px;
+  border: 1px solid #ced4da;
+  padding-top: 5px!important;
 }
 .game-line {
   min-height: 80px;
@@ -138,4 +143,11 @@ body {
   padding-top: 6px!important;
   z-index: 2;
   border-right: none!important;
+}
+/* Мобилка */
+.border-radius-100 {
+  border-radius: 100px;
+}
+.button_clubs_mobile {
+  margin: 5px;
 }

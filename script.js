@@ -11,12 +11,17 @@ clubs.forEach(el => {
         `);
   }
 });
+function hidePlaceholderTable(){
+  placeholder_table.style.display = "none";
+  games_table_section.style.display = "block";
+}
 
 function FormatDateDots(date) {
   let a = date[8] + date[9] + "." + date[5] + date[6] + "." + date[0] + date[1] + date[2] + date[3];
   return a
 }
 
+// работаем с JSON
 function load() {
   const json = getData()
 }
@@ -26,8 +31,11 @@ async function getData() {
   return res.data
 }
 
+
+
 // Выводим игры клуба
 function ShowGames(my_team) {
+  hidePlaceholderTable();
   document.getElementById('games-table-container').style.display = "block";
   document.getElementById('games-table').innerHTML = '';
   // создаём массив дат вылета и прилёта
@@ -103,10 +111,7 @@ function ShowGames(my_team) {
         ticket_button = '<a href="https://www.google.com/search?q=Купить билеты на матч ' + games[i].team1 + ' ' + games[i].team2 + ' ' + dottedMatchTime + '" target="_blank" class="btn btn-outline-secondary">Искать в Google</a>'
       }
 
-      if (matchDate >= new Date()) {
-        // document.querySelector(".games-table").css('display','none')
-        console.log("ererre")
-      };
+
         document.querySelector(".games-table").insertAdjacentHTML('beforeend', `
             <tr id="tableRowId${[i]}">
             <th class="align-middle"><img height=50 src="images/${games[i].img}.png" class="" alt="" /></th>
@@ -144,6 +149,9 @@ function ShowGames(my_team) {
             </td>
           </tr>
           `);
+          if (matchDate <= new Date()) {
+            // document.querySelector(".games-table").style.display = "none";
+          };
       // задаём id каждому блоку выбора дат
       let weekButtonsBlockId = "weekButtons" + i
       // навешиваем onclick на кнопки выбора дат
@@ -204,14 +212,3 @@ function ShowGames(my_team) {
 //   if ()
 // });
 // }
-
-// fetch("data.json")
-//   .then(response => response.json())
-//   .then(json => console.log(json));
-
-// отнимаем 1 день от даты
-// let g = new Date(games[i].date);
-// g.setDate(g.getDate());
-// let g2 = g;
-// g = g.getFullYear() + "-" + (g.getMonth() + 1) + "-" + g.getDate();
-// let formatter = new Intl.DateTimeFormat("ru");
