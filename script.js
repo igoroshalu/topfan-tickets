@@ -1,16 +1,30 @@
 // генерим карточки клубов
+// clubs.forEach(el => {
+//   if (el.show == true) {
+//     document.querySelector(".club_cards_section").insertAdjacentHTML('beforeend', `<div class="club-logo-card card text-center">
+//       <img src="images/${el.logo}" class="card-img-top" alt="">
+//       <div class="card-body">
+//         <h5 class="card-title">${el.name}</h5>
+//         <a onclick="ShowGames(this)" id="${el.name}" href="#club_cards" class="btn btn-outline-primary">Все выезда</a>
+//       </div>
+// 			</div>
+//         `);
+//   }
+// });
+
 clubs.forEach(el => {
   if (el.show == true) {
-    document.querySelector(".club_cards_section").insertAdjacentHTML('beforeend', `<div class="club-logo-card card text-center">
-      <img src="images/${el.logo}" class="card-img-top" alt="">
-      <div class="card-body">
-        <h5 class="card-title">${el.name}</h5>
-        <a onclick="ShowGames(this)" id="${el.name}" href="#club_cards" class="btn btn-outline-primary">Все выезда</a>
-      </div>
-			</div>
+    document.querySelector("#club_buttons_section").insertAdjacentHTML('beforeend', `
+    <button type="button" onclick="ShowGames(this)" id="${el.name}"
+    class="btn btn-light 1btn-sm border-radius-100 button_clubs_mobile"><img src="images/${el.logo}" style="height: 25px;" alt=""> ${el.name}</button>
         `);
+
   }
+  // if (el.name == "Зенит") {
+  //   el.classList.add("active")
+  // }
 });
+
 function hidePlaceholderTable(){
   placeholder_table.style.display = "none";
   games_table_section.style.display = "block";
@@ -22,14 +36,14 @@ function FormatDateDots(date) {
 }
 
 // работаем с JSON
-function load() {
-  const json = getData()
-}
-async function getData() {
-  let res = await fetch('http://api.travelpayouts.com/v2/prices/week-matrix?currency=rub&origin=LED&destination=ROV&show_to_affiliates=true&depart_date=2021-03-11&return_date=2021-03-18&token=7ce5cb7674bf98afc6f68c8eb4f47336')
-  res = await res.json()
-  return res.data
-}
+// function load() {
+//   const json = getData()
+// }
+// async function getData() {
+//   let res = await fetch('http://api.travelpayouts.com/v2/prices/week-matrix?currency=rub&origin=LED&destination=ROV&show_to_affiliates=true&depart_date=2021-03-11&return_date=2021-03-18&token=7ce5cb7674bf98afc6f68c8eb4f47336')
+//   res = await res.json()
+//   return res.data
+// }
 
 
 
@@ -142,7 +156,7 @@ function ShowGames(my_team) {
             </td>
             <td class="align-middle text-center">
             <a href="" target="_blank" class="btn btn-link">Booking.com</a><br>
-            <a href="https://sutochno.ru/front/searchapp/search?guests_adults=1&occupied=${"300"}%3B${matchDateForAviasalesLink}&id=397366&type=city&term=${games[i].city}" target="_blank" class="btn btn-link">Суточно.ру</a>
+            <a href="https://sutochno.ru/front/searchapp/search?guests_adults=1&occupied=${"111"}%3B${matchDateForAviasalesLink}&id=397366&type=city&term=${games[i].city}" target="_blank" class="btn btn-link">Суточно.ру</a>
             </td>
             <td class="align-middle text-center">
             ${ticket_button}

@@ -1,5 +1,7 @@
 body {
   font-family: 'Roboto', sans-serif;
+  background-color: #1168FE;
+
 }
 .background-as {
   background-color: #1168FE;
@@ -111,7 +113,7 @@ body {
   top:0;
   left:0;
   opacity: 0;
-  z-index: 9999;
+  z-index: 3;
 }
 .calendar_day_4_right {
   left:40px;
@@ -144,10 +146,49 @@ body {
   z-index: 2;
   border-right: none!important;
 }
+#placeholder_table {
+  min-height:50px;
+}
+/* #finger {
+	-webkit-animation: slide-top 1s cubic-bezier(0.250, 0.460, 0.450, 0.940) 1s infinite alternate-reverse both;
+	        animation: slide-top 1s cubic-bezier(0.250, 0.460, 0.450, 0.940) 1s infinite alternate-reverse both;
+}
+@-webkit-keyframes slide-top {
+  0% {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+  }
+  100% {
+    -webkit-transform: translateY(-10px);
+            transform: translateY(-10px);
+  }
+}
+@keyframes slide-top {
+  0% {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+  }
+  100% {
+    -webkit-transform: translateY(-10px);
+            transform: translateY(-10px);
+  }
+} */
 /* Мобилка */
 .border-radius-100 {
   border-radius: 100px;
 }
 .button_clubs_mobile {
   margin: 5px;
+}
+.button_clubs_mobile:focus{
+  /* border: 3px solid gray; */
+  margin-bottom: 10px;
+}
+@media (max-width: 992px) {
+  #club_cards {
+    display:none!important;
+  }
+  #placeholder_table {
+    min-height:50px;
+  }
 }
