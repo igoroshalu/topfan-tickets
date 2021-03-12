@@ -26,8 +26,8 @@ body {
 }
 
 #games_desktop_section, #games_mobile_section {
-  display:none;
-  width:0;
+  /* display:none; */
+  /* width:0; */
 }
 .games-table-container{
   border-radius: 10px;
