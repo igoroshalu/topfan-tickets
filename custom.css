@@ -24,8 +24,10 @@ body {
   padding: 0;
   padding-bottom: 5px;
 }
-#games_table_section {
+
+#games_desktop_section, #games_mobile_section {
   display:none;
+  width:0;
 }
 .games-table-container{
   border-radius: 10px;
