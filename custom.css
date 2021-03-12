@@ -181,7 +181,6 @@ body {
   margin: 3px 5px;
 }
 .button_clubs_mobile:focus{
-  /* border: 3px solid gray; */
   margin-bottom: 10px;
 }
 /* карточка игры на мобилке */
@@ -194,5 +193,8 @@ body {
   }
   #placeholder_table {
     min-height:50px;
+  }
+  .button_clubs_mobile:focus{
+    border: 3px solid gray;
   }
 }
