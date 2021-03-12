@@ -10,11 +10,6 @@ clubs.forEach(el => {
 
 function hidePlaceholderTable(){
   finger_club.style.display = "none";
-  games_desktop_section.style.display = "block";
-  games_desktop_section.style.width = "100%";
-  games_mobile_section.style.display = "block";
-  games_mobile_section.style.width = "100%";
-
 }
 
 function FormatDateDots(date) {
