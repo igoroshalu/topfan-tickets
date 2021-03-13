@@ -36,8 +36,6 @@ if(yyy == true) {
   yyy.click();
 }
 
-
-
 // Выводим игры клуба
 let myTeamName;
 let myTeamImage;
@@ -51,8 +49,6 @@ function getMyClubName(my_team_div){
   });
   ShowGames();
 }
-
-Ростов.click();
 
 function ShowGames() {
   // попап обновления страницы
