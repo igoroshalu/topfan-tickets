@@ -217,7 +217,7 @@ function ShowGames(my_team) {
 
       function selectFlightDay() {
         if (this.classList[0] === "calendar_day_1") {
-          document.getElementById(weekButtonsBlockId).querySelector(".selected_departure_day").setAttribute("style", "left:0; border-radius: .25rem 0 0 .25rem;");
+          document.getElementById(weekButtonsBlockId).querySelector(".selected_departure_day").setAttribute("style", "left:0;");
           departArray[i] = 0;
           changeAviasalesLink()
         } else if (this.classList[0] === "calendar_day_2") {
@@ -245,7 +245,7 @@ function ShowGames(my_team) {
           ariveArray[i] = 5;
           changeAviasalesLink()
         } else if (this.classList[0] === "calendar_day_7") {
-          document.getElementById(weekButtonsBlockId).querySelector('.selected_arrival_day').setAttribute("style", "left:87.5%; border-right:none; border-radius: 0 .25rem .25rem 0;");
+          document.getElementById(weekButtonsBlockId).querySelector('.selected_arrival_day').setAttribute("style", "left:87.5%; border-right:none;");
           ariveArray[i] = 6;
           changeAviasalesLink()
         }

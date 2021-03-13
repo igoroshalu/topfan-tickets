@@ -65,7 +65,8 @@ body {
   width:auto;
 }
 .week-buttons {
-  width:38https://sensotek.ru/news/izmerenie-navalochnykh-sypuchikh-gruzov-novaya-oblast-primeneniya-sistem-akl-tec/0px;
+  width:100%;
+  max-width: 380px;
   height:50px;
   display: flex;
   flex-direction: row;
@@ -194,7 +195,7 @@ body {
   #placeholder_table {
     min-height:50px;
   }
-  .button_clubs_mobile:focus{
+  .button_clubs_mobile:focus, .button_clubs_mobile:active {
     border: 3px solid gray;
   }
 }
