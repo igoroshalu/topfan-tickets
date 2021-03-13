@@ -36,6 +36,8 @@ if(yyy == true) {
   yyy.click();
 }
 
+
+
 // Выводим игры клуба
 let myTeamName;
 let myTeamImage;
@@ -50,6 +52,8 @@ function getMyClubName(my_team_div){
   ShowGames();
 }
 
+Ростов.click();
+
 function ShowGames() {
   // попап обновления страницы
   setTimeout(function(){
@@ -60,7 +64,7 @@ function ShowGames() {
 
 
   document.cookie = "club=" + myTeamName ;
-  console.log(myTeamName);
+
 
   hidePlaceholderTable();
   document.getElementById('games-table-container').style.display = "block";
