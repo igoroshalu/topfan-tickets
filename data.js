@@ -132,6 +132,17 @@ let games = [
   {
     "round": "Round 23",
     "city": "Волгоград",
+    "date": "2021-03-13",
+    "time": "18:00",
+    "team1": "Ротор",
+    "team2": "Ростов",
+    "iata1": "VOG",
+    "iata2": "ROV",
+    "img": "rotor",
+  },
+  {
+    "round": "Round 23",
+    "city": "Волгоград",
     "date": "2021-03-17",
     "time": "18:00",
     "team1": "Ротор",

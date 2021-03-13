@@ -48,6 +48,7 @@ function ShowGames(my_team) {
   for (let i = 0; i < games.length; i++) {
     departArray.push(2);
     ariveArray.push(4);
+    if (new Date(games[i].date).getTime() + 18*60*60*1000 < new Date().getTime()) continue; //проверяем чтобы матч был не в прошлом
     if (games[i].team2 == my_team.id) {
       let dottedMatchTime = games[i].date[8] + games[i].date[9] + "." + games[i].date[5] + games[i].date[6] + "." + games[i].date[0] + games[i].date[1] + games[i].date[2] + games[i].date[3];
       // генерим рандомную цену
@@ -105,6 +106,7 @@ function ShowGames(my_team) {
           }
         }
       }
+
       // проверяем есть ли онлайн-касса у клуба
       let ticket_button;
       if (GetTicketLink(games[i].team1) != undefined) {
