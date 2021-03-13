@@ -27,22 +27,19 @@ function FormatDateDots(date) {
 //   return res.data
 // }
 
+// записываем клуб в куку
 function getCookie(name) {
 	var matches = document.cookie.match(new RegExp("(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"));
 	return matches ? decodeURIComponent(matches[1]) : undefined;
 }
 let myTeamName;
 let myTeamImage;
-
-let yyy = getCookie("club");
-console.log(yyy);
-myTeamName = yyy;
-if (yyy != undefined) {
-  function ggf() {
-    document.getElementById(yyy).click()
+myTeamName = getCookie("club");
+if (myTeamName != undefined) {
+  function clickFromCookie() {
+    document.getElementById(myTeamName).click()
   };
-  ggf();
-  console.log("условие работает")
+  clickFromCookie();
 }
 
 // Выводим игры клуба
