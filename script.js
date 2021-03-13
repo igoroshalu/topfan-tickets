@@ -35,6 +35,7 @@ let myTeamName;
 let myTeamImage;
 
 let yyy = getCookie("club");
+console.log(yyy);
 myTeamName = yyy;
 if(yyy == "Зенит") {
   yyy.click();
