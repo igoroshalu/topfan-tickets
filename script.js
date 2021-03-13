@@ -31,9 +31,10 @@ function getCookie(name) {
 	var matches = document.cookie.match(new RegExp("(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"));
 	return matches ? decodeURIComponent(matches[1]) : undefined;
 }
-
 let yyy = getCookie("club");
-console.log(yyy);
+if(yyy == true) {
+  yyy.click();
+}
 
 // Выводим игры клуба
 let myTeamName;
