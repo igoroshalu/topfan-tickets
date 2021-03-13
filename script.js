@@ -28,13 +28,11 @@ function FormatDateDots(date) {
 // }
 
 function getCookie(name) {
-	var matches = document.cookie.match(new RegExp(
-		'(?:^|\s)' + name.replace(/([.$?*+\\\/{}|()\[\]^])/g, '\\$1') + '=(.*?)(?:;|$)';
-	));
+	var matches = document.cookie.match(new RegExp("(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"));
 	return matches ? decodeURIComponent(matches[1]) : undefined;
 }
 
-let yyy = getCookie(club);
+let yyy = getCookie("club");
 console.log(yyy);
 
 // Выводим игры клуба
