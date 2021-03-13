@@ -39,7 +39,7 @@ console.log(yyy);
 myTeamName = yyy;
 if (yyy != undefined) {
   function ggf() {
-    yyy.click()
+    document.getElementById(yyy).click()
   };
   ggf();
   console.log("условие работает")
