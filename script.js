@@ -1,17 +1,8 @@
 // генерим карточки клубов
-document.cookie = "user=John"; // обновляем только куки с именем 'user'
-console.log(document.cookie);
-
-document.cookie = 'name=Вася';
-console.log(document.cookie); //выведет 'name=Вася'
-
-
-
-
 clubs.forEach(el => {
   if (el.show == true) {
     document.querySelector("#club_buttons_section").insertAdjacentHTML('beforeend', `
-    <button type="button" onclick="ShowGames(this)" id="${el.name}"
+    <button type="button" onclick="getMyClubName(this)" id="${el.name}"
     class="btn btn-light br-100 button_clubs_mobile"><img src="images/${el.logo}" style="height: 25px;" alt=""> ${el.name}</button>
         `);
   }
@@ -36,23 +27,41 @@ function FormatDateDots(date) {
 //   return res.data
 // }
 
+function getCookie(name) {
+	var matches = document.cookie.match(new RegExp(
+		'(?:^|\s)' + name.replace(/([.$?*+\\\/{}|()\[\]^])/g, '\\$1') + '=(.*?)(?:;|$)';
+	));
+	return matches ? decodeURIComponent(matches[1]) : undefined;
+}
+
+let yyy = getCookie(club);
+console.log(yyy);
+
 // Выводим игры клуба
 let myTeamName;
 let myTeamImage;
-function ShowGames(my_team) {
 
+function getMyClubName(my_team_div){
+  clubs.forEach(el => {
+    if (el.name == my_team_div.id) {
+      myTeamName = el.name
+      myTeamImage = el.logo
+    }
+  });
+  ShowGames();
+}
 
+function ShowGames() {
   // попап обновления страницы
   setTimeout(function(){
      update_page_button.click();
      modal_update_page.show()
   }, 600000);
-  clubs.forEach(el => {
-    if (el.name == my_team.id) {
-      myTeamName = el.name
-      myTeamImage = el.logo
-    }
-  });
+
+
+
+  document.cookie = "club=" + myTeamName ;
+  console.log(myTeamName);
 
   hidePlaceholderTable();
   document.getElementById('games-table-container').style.display = "block";
@@ -65,7 +74,7 @@ function ShowGames(my_team) {
     departArray.push(2);
     ariveArray.push(4);
     if (new Date(games[i].date).getTime() + 15*60*60*1000 < new Date().getTime()) continue; //проверяем чтобы матч был не в прошлом
-    if (games[i].team2 == my_team.id) {
+    if (games[i].team2 == myTeamName) {
       let dottedMatchTime = games[i].date[8] + games[i].date[9] + "." + games[i].date[5] + games[i].date[6] + "." + games[i].date[0] + games[i].date[1] + games[i].date[2] + games[i].date[3];
       // генерим рандомную цену
       function getExamplePrice() {
