@@ -87,6 +87,7 @@ body {
 }
 .week-buttons div:hover {
   cursor: pointer;
+  background-color: darkorange;
 }
 .week-buttons div:first-child {
   border-radius: .25rem 0 0 .25rem;

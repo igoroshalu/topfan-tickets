@@ -43,8 +43,6 @@ if (myTeamName != undefined) {
 }
 
 // Выводим игры клуба
-
-
 function getMyClubName(my_team_div){
   clubs.forEach(el => {
     if (el.name == my_team_div.id) {
@@ -56,18 +54,14 @@ function getMyClubName(my_team_div){
 }
 
 function ShowGames() {
+  // club_name_for_table.innerHTML = myTeamName
   // попап обновления страницы
   setTimeout(function(){
      update_page_button.click();
      modal_update_page.show()
   }, 600000);
-
-
-
-  document.cookie = "club=" + myTeamName ;
-
-
-  hidePlaceholderTable();
+  document.cookie = "club=" + myTeamName ; //записываем клуб в куку
+  hidePlaceholderTable(); // скрываем надпись"выберите клуб"
   document.getElementById('games-table-container').style.display = "block";
   document.getElementById('games-table').innerHTML = '';
   document.getElementById('game-cards').innerHTML = '';
