@@ -32,9 +32,10 @@ function getCookie(name) {
 	return matches ? decodeURIComponent(matches[1]) : undefined;
 }
 let yyy = getCookie("club");
-if(yyy == true) {
-  yyy.click();
-}
+yyy.click();
+// if(yyy == true) {
+//   yyy.click();
+// }
 
 // Выводим игры клуба
 let myTeamName;
