@@ -37,11 +37,12 @@ let myTeamImage;
 let yyy = getCookie("club");
 console.log(yyy);
 myTeamName = yyy;
-if (1 > 0) {
+if (yyy != undefined) {
   function ggf() {
     yyy.click()
   };
   ggf();
+  console.log("условие работает")
 }
 
 // Выводим игры клуба
