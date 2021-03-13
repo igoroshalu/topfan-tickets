@@ -37,8 +37,10 @@ let myTeamImage;
 let yyy = getCookie("club");
 console.log(yyy);
 myTeamName = yyy;
-if(yyy == "Зенит") {
-  yyy.click();
+if (yyy == "Зенит") {
+  function ggf() {
+    yyy.click()
+  };
 }
 
 // Выводим игры клуба
