@@ -127,7 +127,7 @@ body {
   position:absolute;
   top:0;
   left:25%;
-  z-index: 9999;
+  z-index: 1040;
   background-color: rgba(0, 180, 0, 0.3)!important;
   padding-top: 6px!important;
   border-right: none;
