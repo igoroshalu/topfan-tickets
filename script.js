@@ -37,7 +37,7 @@ let myTeamImage;
 let yyy = getCookie("club");
 console.log(yyy);
 myTeamName = yyy;
-if (yyy != undefined) {
+if (1 > 0) {
   function ggf() {
     yyy.click()
   };
