@@ -31,15 +31,18 @@ function getCookie(name) {
 	var matches = document.cookie.match(new RegExp("(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"));
 	return matches ? decodeURIComponent(matches[1]) : undefined;
 }
+let myTeamName;
+let myTeamImage;
+
 let yyy = getCookie("club");
 yyy.click();
+myTeamName = yyy;
 // if(yyy == true) {
 //   yyy.click();
 // }
 
 // Выводим игры клуба
-let myTeamName;
-let myTeamImage;
+
 
 function getMyClubName(my_team_div){
   clubs.forEach(el => {
