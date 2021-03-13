@@ -35,11 +35,10 @@ let myTeamName;
 let myTeamImage;
 
 let yyy = getCookie("club");
-yyy.click();
 myTeamName = yyy;
-// if(yyy == true) {
-//   yyy.click();
-// }
+if(yyy == "Зенит") {
+  yyy.click();
+}
 
 // Выводим игры клуба
 
