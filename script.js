@@ -11,21 +11,22 @@ clubs.forEach(el => {
 function hidePlaceholderTable(){
   finger_club.style.display = "none";
 }
-
 function FormatDateDots(date) {
   let a = date[8] + date[9] + "." + date[5] + date[6] + "." + date[0] + date[1] + date[2] + date[3];
   return a
 }
 
-// работаем с JSON
-// function load() {
-//   const json = getData()
-// }
-// async function getData() {
-//   let res = await fetch('http://api.travelpayouts.com/v2/prices/week-matrix?currency=rub&origin=LED&destination=ROV&show_to_affiliates=true&depart_date=2021-03-11&return_date=2021-03-18&token=7ce5cb7674bf98afc6f68c8eb4f47336')
-//   res = await res.json()
-//   return res.data
-// }
+let jsonRequestTP = []; //здесь храним запросы к API
+
+//работаем с JSON
+function load() {
+  const json = getData()
+}
+async function getData() {
+  let res = await fetch('http://api.travelpayouts.com/v2/prices/week-matrix?currency=rub&origin=LED&destination=ROV&show_to_affiliates=true&depart_date=2021-03-11&return_date=2021-03-18&token=7ce5cb7674bf98afc6f68c8eb4f47336')
+  res = await res.json()
+  return res.data
+}
 
 // записываем клуб в куку
 function getCookie(name) {
@@ -58,7 +59,6 @@ function ShowGames() {
   // попап обновления страницы
   setTimeout(function(){
      update_page_button.click();
-     modal_update_page.show()
   }, 600000);
   document.cookie = "club=" + myTeamName ; //записываем клуб в куку
   hidePlaceholderTable(); // скрываем надпись"выберите клуб"
@@ -94,7 +94,7 @@ function ShowGames() {
       matchDate.setDate(matchDate.getDate());
       matchDateForAviasalesLink = matchDate.getFullYear() + "-" + addZero((matchDate.getMonth() + 1)) + "-" + addZero(matchDate.getDate());
       //считаем соседние дни с матчем
-      function getNeighborsDates(date) {
+      function getNeighboursDates(date) {
         let dates = []
         for (let w = -3; w <= 3; w++) {
           dates[w + 3] = new Date(+date + w * 24 * 60 * 60 * 1000).getDate()
@@ -102,7 +102,7 @@ function ShowGames() {
         return dates
       }
 
-      function getNeighborsDays(date) {
+      function getNeighboursDays(date) {
         let days = []
         let weekDays = ['вc', 'пн', 'вт', 'ср', 'чт', 'пт', 'сб'];
         for (let w = -3; w <= 3; w++) {
@@ -111,7 +111,7 @@ function ShowGames() {
         return days
       }
 
-      function getNeighborsDateLink(date) {
+      function getNeighboursDateLink(date) {
         let dates = []
         for (let w = -3; w <= 3; w++) {
           // dates[w+3] = new Date(+date + w * 24 * 60 * 60 * 1000).getDate();
@@ -129,6 +129,16 @@ function ShowGames() {
           }
         }
       }
+
+
+      // формируем ссылки для запросов на travelpayouts
+      function getJsonFromTP(iata1,iata2,matchDate) {
+        let link = {}
+        link.id = i
+        link.link = "http://api.travelpayouts.com/v2/prices/week-matrix?currency=rub&origin=" + iata1 + "&destination=" + iata2 + "&show_to_affiliates=true&depart_date=" + matchDate + "&return_date=" + matchDate + "&token=7ce5cb7674bf98afc6f68c8eb4f47336";
+        jsonRequestTP.push(link)
+      }
+      getJsonFromTP(games[i].iata2,games[i].iata1,getNeighboursDateLink(matchDate)[3])
 
       // проверяем есть ли онлайн-касса у клуба
       let ticket_button;
@@ -157,25 +167,25 @@ function ShowGames() {
           <div class="row">
             <div class="col-12 text-center">
             <div class="week-buttons" id="weekButtons${[i]}">
-              <div class="calendar_day_1 calendar_day"><p><small>${getNeighborsDates(matchDate)[0]} ${getNeighborsDays(matchDate)[0]}</small></p></div>
-              <div class="calendar_day_2 calendar_day"><p><small>${getNeighborsDates(matchDate)[1]} ${getNeighborsDays(matchDate)[1]}</small></p></div>
-              <div class="calendar_day_3 calendar_day"><p><small>${getNeighborsDates(matchDate)[2]} ${getNeighborsDays(matchDate)[2]}</small></p></div>
+              <div class="calendar_day_1 calendar_day"><p><small>${getNeighboursDates(matchDate)[0]} ${getNeighboursDays(matchDate)[0]}</small></p></div>
+              <div class="calendar_day_2 calendar_day"><p><small>${getNeighboursDates(matchDate)[1]} ${getNeighboursDays(matchDate)[1]}</small></p></div>
+              <div class="calendar_day_3 calendar_day"><p><small>${getNeighboursDates(matchDate)[2]} ${getNeighboursDays(matchDate)[2]}</small></p></div>
               <div class="calendar_day_4 calendar_day week_buttons_match_day">
-                <p><small>${getNeighborsDates(matchDate)[3]} ${getNeighborsDays(matchDate)[3]}</small></p>
+                <p><small>${getNeighboursDates(matchDate)[3]} ${getNeighboursDays(matchDate)[3]}</small></p>
                 <div class="match_day_icon"><i class="fas fa-futbol"></i></div>
                 <div class="calendar_day_4_left calendar_day"></div>
                 <div class="calendar_day_4_right calendar_day"></div>
               </div>
-              <div class="calendar_day_5 calendar_day"><p><small>${getNeighborsDates(matchDate)[4]} ${getNeighborsDays(matchDate)[4]}</small></p></div>
-              <div class="calendar_day_6 calendar_day"><p><small>${getNeighborsDates(matchDate)[5]} ${getNeighborsDays(matchDate)[5]}</small></p></div>
+              <div class="calendar_day_5 calendar_day"><p><small>${getNeighboursDates(matchDate)[4]} ${getNeighboursDays(matchDate)[4]}</small></p></div>
+              <div class="calendar_day_6 calendar_day"><p><small>${getNeighboursDates(matchDate)[5]} ${getNeighboursDays(matchDate)[5]}</small></p></div>
               <div class="selected_departure_day"><i class="fas fa-plane-departure"></i></div>
               <div class="selected_arrival_day"><i class="fas fa-plane-arrival"></i></div>
-              <div class="calendar_day_7 calendar_day"><p><small>${getNeighborsDates(matchDate)[6]} ${getNeighborsDays(matchDate)[6]}</small></p></div>
+              <div class="calendar_day_7 calendar_day"><p><small>${getNeighboursDates(matchDate)[6]} ${getNeighboursDays(matchDate)[6]}</small></p></div>
             </div>
               <div class="d-grid gap-2 pt-2 pb-2">
               <a href="https://www.aviasales.ru/search?origin_iata=`
               + games[i].iata2 + `&destination_iata=` + games[i].iata1 + `&adults=1&children=0&infants=0&trip_class=0&depart_date=`
-              + getNeighborsDateLink(matchDate)[2] + `&return_date=` + getNeighborsDateLink(matchDate)[4]
+              + getNeighboursDateLink(matchDate)[2] + `&return_date=` + getNeighboursDateLink(matchDate)[4]
               + `&with_request=true&marker=311551.site" style="margin-bottom:5px;" target="_blank" class="aviasalesLink btn btn-primary">
               <svg width="16" height="30" viewBox="0 0 16 30" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M10.2206 6.5625L7.0625 1.5625H5.8125L7.39125 6.5625L4.04125 6.5625L3 4.6875H2.0625L2.6875 7.5L2.0625 10.3125H3L4.04187 8.4375H7.39187L5.8125 13.4375H7.0625L10.2206 8.4375H13.625C13.8736 8.4375 14.1121 8.33873 14.2879 8.16291C14.4637 7.9871 14.5625 7.74864 14.5625 7.5C14.5625 7.25136 14.4637 7.0129 14.2879 6.83709C14.1121 6.66127 13.8736 6.5625 13.625 6.5625H10.2206Z" fill="white"/>
@@ -193,31 +203,31 @@ function ShowGames() {
             <td class="align-middle">${games[i].team1}</br><b>${games[i].city}</b></br>${dottedMatchTime} </br>${games[i].time}</td>
             <td class="align-middle text-center">
             <div class="week-buttons" id="weekButtons${[i]}">
-              <div class="calendar_day_1 calendar_day"><p>${getNeighborsDates(matchDate)[0]} <small>${getNeighborsDays(matchDate)[0]}</small></p></div>
-              <div class="calendar_day_2 calendar_day"><p>${getNeighborsDates(matchDate)[1]} <small>${getNeighborsDays(matchDate)[1]}</small></p></div>
-              <div class="calendar_day_3 calendar_day"><p>${getNeighborsDates(matchDate)[2]} <small>${getNeighborsDays(matchDate)[2]}</small></p></div>
+              <div class="calendar_day_1 calendar_day"><p>${getNeighboursDates(matchDate)[0]} <small>${getNeighboursDays(matchDate)[0]}</small></p></div>
+              <div class="calendar_day_2 calendar_day"><p>${getNeighboursDates(matchDate)[1]} <small>${getNeighboursDays(matchDate)[1]}</small></p></div>
+              <div class="calendar_day_3 calendar_day"><p>${getNeighboursDates(matchDate)[2]} <small>${getNeighboursDays(matchDate)[2]}</small></p></div>
               <div class="calendar_day_4 calendar_day week_buttons_match_day">
-                <p>${getNeighborsDates(matchDate)[3]} <small>${getNeighborsDays(matchDate)[3]}</small></p>
+                <p>${getNeighboursDates(matchDate)[3]} <small>${getNeighboursDays(matchDate)[3]}</small></p>
                 <div class="match_day_icon"><i class="fas fa-futbol"></i></div>
                 <div class="calendar_day_4_left calendar_day"></div>
                 <div class="calendar_day_4_right calendar_day"></div>
               </div>
-              <div class="calendar_day_5 calendar_day"><p>${getNeighborsDates(matchDate)[4]} <small>${getNeighborsDays(matchDate)[4]}</small></p></div>
-              <div class="calendar_day_6 calendar_day"><p>${getNeighborsDates(matchDate)[5]} <small>${getNeighborsDays(matchDate)[5]}</small></p></div>
+              <div class="calendar_day_5 calendar_day"><p>${getNeighboursDates(matchDate)[4]} <small>${getNeighboursDays(matchDate)[4]}</small></p></div>
+              <div class="calendar_day_6 calendar_day"><p>${getNeighboursDates(matchDate)[5]} <small>${getNeighboursDays(matchDate)[5]}</small></p></div>
               <div class="selected_departure_day"><i class="fas fa-plane-departure"></i></div>
               <div class="selected_arrival_day"><i class="fas fa-plane-arrival"></i></div>
-              <div class="calendar_day_7 calendar_day"><p>${getNeighborsDates(matchDate)[6]} <small>${getNeighborsDays(matchDate)[6]}</small></p></div>
+              <div class="calendar_day_7 calendar_day"><p>${getNeighboursDates(matchDate)[6]} <small>${getNeighboursDays(matchDate)[6]}</small></p></div>
             </div>
             <small style="color:green; display:none;">*при перелёте в день матча, убедитесь, что успеваете по времени</small>
             </td>
             <td class="align-middle text-center"><a href="https://www.aviasales.ru/search?origin_iata=`
             + games[i].iata2 + `&destination_iata=` + games[i].iata1 + `&adults=1&children=0&infants=0&trip_class=0&depart_date=`
-            + getNeighborsDateLink(matchDate)[2] + `&return_date=` + getNeighborsDateLink(matchDate)[4]
+            + getNeighboursDateLink(matchDate)[2] + `&return_date=` + getNeighboursDateLink(matchDate)[4]
             + `&with_request=true&marker=311551.site" style="margin-bottom:5px;" target="_blank" class="aviasalesLink btn btn-primary">
             <svg width="16" height="30" viewBox="0 0 16 30" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M10.2206 6.5625L7.0625 1.5625H5.8125L7.39125 6.5625L4.04125 6.5625L3 4.6875H2.0625L2.6875 7.5L2.0625 10.3125H3L4.04187 8.4375H7.39187L5.8125 13.4375H7.0625L10.2206 8.4375H13.625C13.8736 8.4375 14.1121 8.33873 14.2879 8.16291C14.4637 7.9871 14.5625 7.74864 14.5625 7.5C14.5625 7.25136 14.4637 7.0129 14.2879 6.83709C14.1121 6.66127 13.8736 6.5625 13.625 6.5625H10.2206Z" fill="white"/>
             <path d="M5.77938 21.5625L8.9375 16.5625H10.1875L8.60875 21.5625H11.9588L13 19.6875H13.9375L13.3125 22.5L13.9375 25.3125H13L11.9581 23.4375H8.60813L10.1875 28.4375H8.9375L5.77938 23.4375H2.375C2.12636 23.4375 1.8879 23.3387 1.71209 23.1629C1.53627 22.9871 1.4375 22.7486 1.4375 22.5C1.4375 22.2514 1.53627 22.0129 1.71209 21.8371C1.8879 21.6613 2.12636 21.5625 2.375 21.5625H5.77938Z" fill="white"/>
-            </svg>&nbsp;&nbsp;  <span class="ticketPrice">${getExamplePrice()}</span> ₽</a>
+            </svg>&nbsp;&nbsp;  <span class="ticketPrice">${findBestPrice(getNeighboursDateLink(matchDate)[2],getNeighboursDateLink(matchDate)[4])}</span> ₽</a>
             </td>
             <td class="align-middle text-center">
             <a href="" target="_blank" class="btn btn-link">Booking.com</a><br>
@@ -229,9 +239,7 @@ function ShowGames() {
           </tr>
           `);
           }
-          if (matchDate <= new Date()) {
-            // document.querySelector(".games-table").style.display = "none";
-          };
+
       // задаём id каждому блоку выбора дат
       let weekButtonsBlockId = "weekButtons" + i
       // навешиваем onclick на кнопки выбора дат
@@ -275,19 +283,18 @@ function ShowGames() {
           changeAviasalesLink()
         }
       }
-
       function changeAviasalesLink() {
         if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(navigator.userAgent)) {
           document.getElementById("game_card_"+i).querySelector('.aviasalesLink').href = `https://www.aviasales.ru/search?origin_iata=`
           + games[i].iata2 + `&destination_iata=` + games[i].iata1 + `&adults=1&children=0&infants=0&trip_class=0&depart_date=`
-          + getNeighborsDateLink(matchDate)[departArray[i]] + `&return_date=` + getNeighborsDateLink(matchDate)[ariveArray[i]]
+          + getNeighboursDateLink(matchDate)[departArray[i]] + `&return_date=` + getNeighboursDateLink(matchDate)[ariveArray[i]]
           + `&with_request=true&marker=311551.site"`;
           document.getElementById("game_card_"+i).querySelector('.ticketPrice').innerHTML = getExamplePrice()
         }
         else {
           document.getElementById("tableRowId"+i).querySelector('.aviasalesLink').href = `https://www.aviasales.ru/search?origin_iata=`
           + games[i].iata2 + `&destination_iata=` + games[i].iata1 + `&adults=1&children=0&infants=0&trip_class=0&depart_date=`
-          + getNeighborsDateLink(matchDate)[departArray[i]] + `&return_date=` + getNeighborsDateLink(matchDate)[ariveArray[i]]
+          + getNeighboursDateLink(matchDate)[departArray[i]] + `&return_date=` + getNeighboursDateLink(matchDate)[ariveArray[i]]
           + `&with_request=true&marker=311551.site"`;
           document.getElementById("tableRowId"+i).querySelector('.ticketPrice').innerHTML = getExamplePrice();
         }
@@ -296,8 +303,31 @@ function ShowGames() {
   }
 }
 
-// function findBestPrice(date1,date2) {
-// forEach((item, i) => {
-//   if ()
-// });
+
+function findTickets() {
+
+}
+
+// let jsonRequestTP = [];
+// function getJsonFromTP(iata1,iata2,matchDate) {
+//   jsonRequestTP[i] = "http://api.travelpayouts.com/v2/prices/week-matrix?currency=rub&origin=" + iata1 + "&destination=" + iata2 + "&show_to_affiliates=true&depart_date=" + matchDate + "&return_date=" + matchDate + "&token=7ce5cb7674bf98afc6f68c8eb4f47336";
 // }
+
+
+// находим по датам лучшую цену в массиве
+function findBestPrice(depart,arrive) {
+  let bestPrice = 0;
+  for (var i = 0; i < myTickets.length; i++) {
+    if (myTickets[i].depart_date === depart && myTickets[i].return_date === arrive){
+      if (bestPrice === 0){
+        bestPrice = myTickets[i].value;
+      }
+      else {
+        if (myTickets[i].value < bestPrice) {
+          bestPrice = myTickets[i].value;
+        }
+      }
+    }
+  }
+  return bestPrice
+};

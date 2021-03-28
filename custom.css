@@ -87,7 +87,6 @@ body {
 }
 .week-buttons div:hover {
   cursor: pointer;
-  background-color: darkorange;
 }
 .week-buttons div:first-child {
   border-radius: .25rem 0 0 .25rem;
@@ -108,6 +107,19 @@ body {
 .week_buttons_match_day {
   width: 25%!important;
   position:relative;
+}
+.angry-animate{
+-webkit-animation:rotate 2s ease 0s infinite normal;
+-moz-animation:rotate 2s ease 0s infinite normal;
+-ms-animation:rotate 2s ease 0s infinite normal;
+animation:rotate 2s ease 0s infinite normal;
+}
+
+@-webkit-keyframes rotate {
+100%{ -webkit-transform: rotate(-360deg); transform: rotate(-360deg); }
+}
+@keyframes rotate {
+100%{ transform: rotate(-360deg); }
 }
 .calendar_day_4_left, .calendar_day_4_right {
   height:100%;
